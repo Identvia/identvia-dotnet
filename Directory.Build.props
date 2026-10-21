@@ -1,0 +1,19 @@
+<Project>
+  <PropertyGroup>
+    <Version>0.1.0</Version>
+    <Authors>Identvia</Authors>
+    <Company>Identvia</Company>
+    <Copyright>© 2026 Identvia</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://id.identvia.com/developers/docs/dotnet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/identvia/identvia-dotnet</RepositoryUrl>
+    <PackageTags>identvia;oidc;openid-connect;oauth2;pkce;authentication</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <LangVersion>latest</LangVersion>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+</Project>

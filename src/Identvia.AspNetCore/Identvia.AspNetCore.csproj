@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <PackageId>Identvia.AspNetCore</PackageId>
+    <Description>AddIdentvia(): Sign in with Identvia for ASP.NET Core, the OpenID Connect handler with Identvia's secure defaults (PKCE, RFC 9207 iss check, RS256/ES256 only) plus refresh-token rotation helpers.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="8.0.10" />
+    <ProjectReference Include="../Identvia/Identvia.csproj" />
+    <InternalsVisibleTo Include="Identvia.Tests" />
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

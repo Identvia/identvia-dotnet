@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0</TargetFrameworks>
+    <PackageId>Identvia</PackageId>
+    <Description>Sign in with Identvia for .NET apps (MAUI, WinUI, WPF, console): OpenID Connect + PKCE in the system browser with a loopback redirect, ID token validation and refresh-token rotation. Also server helpers for RFC 8693 token exchange and CIBA.</Description>
+    <IsTrimmable>true</IsTrimmable>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="System.Security.Cryptography.ProtectedData" Version="8.0.0" />
+    <InternalsVisibleTo Include="Identvia.Tests" />
+    <None Include="../../README.md" Pack="true" PackagePath="/" />
+  </ItemGroup>
+</Project>

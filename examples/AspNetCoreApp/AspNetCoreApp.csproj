@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup><TargetFramework>net8.0</TargetFramework><IsPackable>false</IsPackable><GenerateDocumentationFile>false</GenerateDocumentationFile></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../../src/Identvia.AspNetCore/Identvia.AspNetCore.csproj" /></ItemGroup>
+</Project>

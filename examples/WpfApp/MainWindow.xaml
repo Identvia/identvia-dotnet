@@ -1,0 +1,8 @@
+<Window x:Class="WpfApp.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Identvia WPF example" Width="420" Height="260">
+    <StackPanel Margin="24" VerticalAlignment="Center">
+        <Button x:Name="SignIn" Click="OnSignIn" Padding="16,8" Background="#18181B" Foreground="White" BorderBrush="#3F3F46" FontWeight="SemiBold">Sign in with Identvia</Button>
+        <TextBlock x:Name="Status" Margin="0,16,0,0" TextWrapping="Wrap" />
+        <Button x:Name="SignOut" Click="OnSignOut" Margin="0,12,0,0" Visibility="Collapsed">Sign out</Button>
+    </StackPanel>
+</Window>
