@@ -58,8 +58,10 @@ public sealed class LoopbackBrowser : IAuthBrowser
             ctx.Response.ContentType = "text/html; charset=utf-8";
             ctx.Response.Headers["Cache-Control"] = "no-store";
             ctx.Response.Headers["Content-Security-Policy"] = "default-src 'none'; style-src 'unsafe-inline'";
-            await ctx.Response.OutputStream.WriteAsync(bytes, ct).ConfigureAwait(false);
-            ctx.Response.Close();
+            ctx.Response.ContentLength64 = bytes.Length;
+            // Send synchronously before the listener is disposed; otherwise http.sys (Windows) resets the connection
+            // and the browser shows an error instead of the page.
+            ctx.Response.Close(bytes, willBlock: true);
             // Rebuild from the registered redirect so the host is exactly what we registered.
             return new Uri(redirectUri.GetLeftPart(UriPartial.Path) + reqUrl.Query);
         }
