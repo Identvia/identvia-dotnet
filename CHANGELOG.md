@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 (2026-10-21)
+
+- **Fix (Windows):** `LoopbackBrowser` sends the "You're signed in" page with a `Content-Length` and a blocking close. Before, http.sys reset the connection when the listener was disposed, and the browser showed an error page.
+- Tests: the shared RSA test key is generated eagerly (Windows CNG creates keys lazily, so parallel tests could race). The loopback test now awaits its simulated browser so failures surface.
+- `.gitignore` now excludes `.nupkg`/`.snupkg` files.
+
 ## 0.1.0 — 2026-10-21
 
 ### Identvia (NuGet)
