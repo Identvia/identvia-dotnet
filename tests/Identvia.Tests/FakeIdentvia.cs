@@ -13,7 +13,9 @@ public static class T
     public const string ConfClientId = "oid_dotnet_conf";
     public const string ConfSecret = "ivs_test_secret_value";
     public const string Redirect = "http://127.0.0.1:7890/callback";
-    public static readonly RSA SharedRsa = RSA.Create(2048);
+    // Windows (CNG) generates the key lazily on first use; parallel tests racing on that can see different keys.
+    public static readonly RSA SharedRsa = Eager(RSA.Create(2048));
+    private static RSA Eager(RSA r) { r.ExportParameters(true); return r; }
 
     public static string B64(JsonObject o) => Base64Url.Encode(Encoding.UTF8.GetBytes(o.ToJsonString()));
 
