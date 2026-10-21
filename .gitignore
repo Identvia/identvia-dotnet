@@ -4,3 +4,7 @@ artifacts/
 *.user
 .vs/
 TestResults/
+*.nupkg
+*.snupkg
+.DS_Store
+live-*.json
