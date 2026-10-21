@@ -17,10 +17,11 @@ public class LoopbackBrowserTests
         var idp = new FakeIdentvia(); idp.RedirectUris.Add(redirect);
         using var http = new HttpClient();
         string? page = null;
+        Task? visit = null;
         // The "system browser": hits a decoy path first, then follows Identvia's redirect to the loopback listener.
         var browser = new LoopbackBrowser(async url =>
         {
-            _ = Task.Run(async () =>
+            visit = Task.Run(async () =>
             {
                 await Task.Delay(100);
                 Assert.Equal(HttpStatusCode.NotFound, (await http.GetAsync($"http://127.0.0.1:{port}/callback/favicon.ico")).StatusCode);
@@ -31,7 +32,7 @@ public class LoopbackBrowserTests
         using var c = new IdentviaClient(new IdentviaClientOptions { Issuer = T.Issuer, ClientId = T.ClientId, RedirectUri = redirect, HttpClient = idp.Client() }, browser, new InMemoryTokenStore());
         var s = await c.SignInAsync();
         Assert.Equal(idp.UserSub, s.User.Sub);
-        await Task.Delay(100);
+        await visit!.WaitAsync(TimeSpan.FromSeconds(10)); // surfaces the browser side's exceptions
         Assert.Contains("You're signed in", page);
     }
 
