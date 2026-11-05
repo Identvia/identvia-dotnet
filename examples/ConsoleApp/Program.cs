@@ -1,5 +1,5 @@
 // Desktop/CLI sign-in with the system browser and a loopback redirect.
-// Register http://127.0.0.1:7890/callback on a *public* Identvia client (no secret).
+// Register http://127.0.0.1:7890/callback on a Native & desktop (public) Identvia client (no secret).
 using Identvia;
 
 using var identvia = new IdentviaClient(

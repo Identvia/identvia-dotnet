@@ -5,7 +5,7 @@ namespace WpfApp;
 
 public partial class MainWindow : Window
 {
-    // Public client: the redirect is a fixed loopback port registered on the Identvia client. No secret in the app.
+    // Native & desktop (public) client: the redirect is a fixed loopback port registered on the Identvia client. No secret in the app.
     private readonly IdentviaClient _identvia = new(
         new IdentviaClientOptions { ClientId = "oid_your_client_id", RedirectUri = "http://127.0.0.1:7890/callback" },
         new LoopbackBrowser(), new DpapiTokenStore("IdentviaWpfExample"));

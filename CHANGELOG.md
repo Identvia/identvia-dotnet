@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2 (2026-11-05)
+
+- Desktop examples: register loopback redirects on a **Native & desktop** portal client (RFC 8252 any-port).
+
 ## 0.1.1 (2026-10-21)
 
 - **Fix (Windows):** `LoopbackBrowser` sends the "You're signed in" page with a `Content-Length` and a blocking close. Before, http.sys reset the connection when the listener was disposed, and the browser showed an error page.
