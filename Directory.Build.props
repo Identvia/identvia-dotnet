@@ -1,13 +1,21 @@
 <Project>
   <PropertyGroup>
-    <Version>0.1.2</Version>
+    <Version>0.1.3</Version>
     <Authors>Identvia</Authors>
     <Company>Identvia</Company>
     <Copyright>© 2026 Identvia</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://id.identvia.com/developers/docs/dotnet</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/identvia/identvia-dotnet</RepositoryUrl>
-    <PackageTags>identvia;oidc;openid-connect;oauth2;pkce;authentication</PackageTags>
+    <PackageProjectUrl>https://identvia.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Identvia/identvia-dotnet</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageReleaseNotes>https://github.com/Identvia/identvia-dotnet/blob/main/CHANGELOG.md</PackageReleaseNotes>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <Deterministic>true</Deterministic>
+    <PackageTags>identvia;oidc;openid-connect;oauth2;pkce;sso;authentication</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
@@ -16,4 +24,10 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(GITHUB_ACTIONS)' == 'true'">
+    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+  </PropertyGroup>
+  <ItemGroup Condition="'$(IsPackable)' != 'false'">
+    <None Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="/" Visible="false" />
+  </ItemGroup>
 </Project>

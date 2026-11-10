@@ -1,11 +1,16 @@
 # Identvia for .NET
 
+[![NuGet Identvia](https://img.shields.io/nuget/v/Identvia?label=Identvia)](https://www.nuget.org/packages/Identvia)
+[![NuGet Identvia.AspNetCore](https://img.shields.io/nuget/v/Identvia.AspNetCore?label=Identvia.AspNetCore)](https://www.nuget.org/packages/Identvia.AspNetCore)
+[![CI](https://github.com/Identvia/identvia-dotnet/actions/workflows/ci.yml/badge.svg)](https://github.com/Identvia/identvia-dotnet/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Identvia/identvia-dotnet/blob/main/LICENSE)
+
 Sign in with [Identvia](https://identvia.com) from ASP.NET Core, WPF, WinUI, WinForms, MAUI and console apps.
 
 | Package | For |
 |---|---|
-| `Identvia` | Native apps (public client: system browser + loopback/PKCE), plus `IdentviaServerClient` for back-end calls (introspection, token exchange, CIBA). |
-| `Identvia.AspNetCore` | Web apps: `AddIdentvia()` on the built-in OpenID Connect handler. |
+| [`Identvia`](https://www.nuget.org/packages/Identvia) | Native apps (public client: system browser + loopback/PKCE), plus `IdentviaServerClient` for back-end calls (introspection, token exchange, CIBA). |
+| [`Identvia.AspNetCore`](https://www.nuget.org/packages/Identvia.AspNetCore) | Web apps: `AddIdentvia()` on the built-in OpenID Connect handler. |
 
 Every `sub` is **pairwise**: stable for your app, different in other apps. Key your users on it, not on the email.
 

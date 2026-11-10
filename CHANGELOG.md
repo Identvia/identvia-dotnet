@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.1.3 (2026-11-09)
+
+- First release on NuGet (`Identvia`, `Identvia.AspNetCore`). Publishing runs from GitHub Actions (`release.yml`) with NuGet trusted publishing (OIDC), so no long-lived API key is stored.
+- Package metadata: project URL `https://identvia.com`, repository `github.com/Identvia/identvia-dotnet` with Source Link commit info, package icon, release notes link, symbol packages (`.snupkg`) and deterministic CI builds. No code changes.
+
 ## 0.1.2 (2026-11-05)
 
 - Desktop examples: register loopback redirects on a **Native & desktop** portal client (RFC 8252 any-port).

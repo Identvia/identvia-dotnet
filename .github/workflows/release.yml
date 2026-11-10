@@ -1,0 +1,50 @@
+# Publishes Identvia and Identvia.AspNetCore to nuget.org when a version tag (v1.2.3) is pushed.
+#
+# Auth: NuGet trusted publishing (GitHub OIDC -> short-lived API key, no stored secret).
+# nuget.org -> identvia (account menu) -> Trusted Publishing -> Add policy:
+#   Repository owner "Identvia", repository "identvia-dotnet", workflow file "release.yml", environment "nuget".
+# The policy is owner-scoped, so it also covers the first push of a brand-new package ID.
+#
+# `--skip-duplicate` makes re-runs safe. Run it manually (workflow_dispatch) to build, test and pack without pushing.
+name: Release
+on:
+  push:
+    tags: ['v[0-9]+.[0-9]+.[0-9]+']
+  workflow_dispatch:
+permissions: { contents: read }
+concurrency: { group: release-nuget, cancel-in-progress: false }
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    environment: nuget
+    permissions:
+      contents: read
+      id-token: write # NuGet trusted publishing (OIDC)
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-dotnet@v4
+        with: { dotnet-version: '8.0.x' }
+      - name: Tag matches <Version>
+        if: github.ref_type == 'tag'
+        run: |
+          v=$(sed -n 's:.*<Version>\(.*\)</Version>.*:\1:p' Directory.Build.props)
+          [ "v$v" = "$GITHUB_REF_NAME" ] || { echo "::error::Directory.Build.props is $v but the tag is $GITHUB_REF_NAME"; exit 1; }
+      - run: dotnet build -c Release
+      - run: dotnet test -c Release --no-build --filter "Category!=Live"
+      - run: dotnet pack src/Identvia -c Release --no-build -o artifacts
+      - run: dotnet pack src/Identvia.AspNetCore -c Release --no-build -o artifacts
+      - uses: actions/upload-artifact@v4
+        with: { name: nuget, path: 'artifacts/*.*nupkg' }
+      - name: NuGet login (OIDC -> temporary API key)
+        if: github.ref_type == 'tag'
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: identvia # nuget.org profile name (not the email)
+      - name: Push to nuget.org
+        if: github.ref_type == 'tag'
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        # Pushing a .nupkg also pushes the matching .snupkg next to it.
+        run: dotnet nuget push "artifacts/*.nupkg" --api-key "$NUGET_API_KEY" --source https://api.nuget.org/v3/index.json --skip-duplicate
